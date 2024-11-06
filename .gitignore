@@ -1,0 +1,12 @@
+*.log
+target/*
+*.class
+.factorypath
+.project
+.classpath
+.settings/*
+
+/target/
+/bin/
+.idea/*
+/*.pid

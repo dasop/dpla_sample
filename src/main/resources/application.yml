@@ -1,0 +1,76 @@
+# Embedded Tomcat Configuration
+server:
+  port: 8080
+  shutdown: graceful
+  tomcat: 
+    use-relative-redirects: true
+  servlet:
+    context-path: /api
+    session:
+      timeout: 3600
+    encoding:
+      charset: utf-8
+      enabled: true
+      force: false
+  # 응답에 exception 내용을 포함할지 여부
+  error:
+    include-exception : true
+    include-stacktrace: never
+    #path : /error
+    # 오류시 기본으로 노출 페이지를 사용할지 여부
+    whitelabel.enabled : true
+
+spring:
+  application:
+    name: DUMMY
+  banner:
+    location: classpath:banner
+  # FileUpload
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+  messages:
+    basename : message
+    encoding : UTF-8
+  pid:
+    file: ./${spring.application.name}.pid
+
+    
+# Kubernates Probes
+management:
+  endpoint:
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+    health:
+      probes:
+        enabled: true
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  metrics:
+    tags:
+      application: ${spring.application.name}
+      pod: ${hostname}
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+
+# MyBatis Configuration
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+
+dpla:
+  support:
+    serviceNm: D.pla Api
+    serviceCd: PGXXXXXX
+    aes256ciper:
+      secretKey: lHHO/UpOANsEBJjZj3+7c4vFbmsGeiwOhRyQb1LkTjE= # 프로젝트 별 수정
+      iv: gpb5et443vrju19d # 프로젝트 별 수정

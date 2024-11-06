@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kt.mddp.sample.api.mapper.ApiTestMapper">
+
+    <insert id="insertMap" parameterType="hashmap" >
+INSERT INTO test_table (test1, test2, test3, test4, test5, test6, test7, test8, test9, test10
+) VALUES (
+#{test1, jdbcType=VARCHAR}
+, #{test2, jdbcType=VARCHAR}
+, #{test3, jdbcType=VARCHAR}
+, #{test4, jdbcType=VARCHAR}
+, #{test5, jdbcType=VARCHAR}
+, #{test6, jdbcType=VARCHAR}
+, #{test7, jdbcType=VARCHAR}
+, #{test8, jdbcType=VARCHAR}
+, #{test9, jdbcType=VARCHAR}
+, #{test10, jdbcType=VARCHAR}
+)
+    </insert>
+
+    <insert id="insertVo" parameterType="com.kt.mddp.sample.api.domain.Test" >
+INSERT INTO test_table (test1, test2, test3, test4, test5, test6, test7, test8, test9, test10
+) VALUES (
+#{test1, jdbcType=VARCHAR}
+, #{test2, jdbcType=VARCHAR}
+, #{test3, jdbcType=VARCHAR}
+, #{test4, jdbcType=VARCHAR}
+, #{test5, jdbcType=VARCHAR}
+, #{test6, jdbcType=VARCHAR}
+, #{test7, jdbcType=VARCHAR}
+, #{test8, jdbcType=VARCHAR}
+, #{test9, jdbcType=VARCHAR}
+, #{test10, jdbcType=VARCHAR}
+)
+    </insert>
+</mapper>

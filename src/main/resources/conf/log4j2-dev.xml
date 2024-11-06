@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="EUC-KR"?>
+
+<!-- 30초마다 설정 파일의 변경을 확인한다. 파일이 변경되면 다시 로딩한다 -->
+<configuration status="debug" monitorInterval="30">
+
+    <!-- 외부 설정파일을 사용할 수 있다.<property resource="resource.properties"/> -->
+    <properties>
+        <property name="SERVER_TYPE">DEV</property>
+        <property name="LOG_DIR_HOME">/applog/mddp/api</property>
+        <property name="CONSOLE_PATTERN">[MDDP]%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36}(%F:%L) -%msg%n</property>
+        <property name="DEBUG_PATTERN">[MDDP_DEBUG]%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36}(%F:%L) - %msg%n</property>
+        <property name="ERROR_PATTERN">[MDDP_ERROR]%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36}(%F:%L) - %msg%n</property>
+        <property name="INFO_PATTERN">[MDDP_INFO]%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36}(%F:%L) - %msg%n</property>
+    </properties>
+
+    <Appenders>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${CONSOLE_PATTERN}" />
+        </Console>
+
+        <RollingFile name="DEBUG_FILE" fileName="${LOG_DIR_HOME}/DEBUG.log"  filePattern="${LOG_DIR_HOME}/DEBUG.%d{yyyy-MM-dd-HH}.%i.log">
+            <PatternLayout pattern="${DEBUG_PATTERN}" />
+            <Policies>
+                <SizeBasedTriggeringPolicy size="100MB" />
+                <TimeBasedTriggeringPolicy modulate="true" interval="1" /><!-- 일별 로그 파일 생성 -->
+            </Policies>
+            <DefaultRolloverStrategy max="5" ><!-- 롤링 파일 5개 까지 생성 -->
+                <Delete basePath="${LOG_DIR_HOME}" maxDepth="1">
+                    <IfFileName glob="DEBUG.*.log" />
+                    <IfLastModified age="5d" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+        <RollingFile name="ERROR_FILE" fileName="${LOG_DIR_HOME}/ERROR.log"  filePattern="${LOG_DIR_HOME}/ERROR.%d{yyyy-MM-dd-HH}.%i.log">
+            <PatternLayout pattern="${ERROR_PATTERN}" />
+            <Policies>
+                <SizeBasedTriggeringPolicy size="100MB" />
+                <TimeBasedTriggeringPolicy modulate="true" interval="1" /><!-- 일별 로그 파일 생성 -->
+            </Policies>
+            <DefaultRolloverStrategy max="5" ><!-- 롤링 파일 5개 까지 생성 -->
+                <Delete basePath="${LOG_DIR_HOME}" maxDepth="1">
+                    <IfFileName glob="ERROR.*.log" />
+                    <IfLastModified age="5d" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+        <RollingFile name="INFO_FILE" fileName="${LOG_DIR_HOME}/INFO.log"  filePattern="${LOG_DIR_HOME}/INFO.%d{yyyy-MM-dd-HH}.%i.log">
+            <PatternLayout pattern="${INFO_PATTERN}" />
+            <Policies>
+                <SizeBasedTriggeringPolicy size="100MB" />
+                <TimeBasedTriggeringPolicy modulate="true" interval="1" /><!-- 일별 로그 파일 생성 -->
+            </Policies>
+            <DefaultRolloverStrategy max="5" ><!-- 롤링 파일 5개 까지 생성 -->
+                <Delete basePath="${LOG_DIR_HOME}" maxDepth="1">
+                    <IfFileName glob="INFO.*.log" />
+                    <IfLastModified age="5d" />
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+    </Appenders>
+
+    <loggers>
+        <logger name="org.springframework" level="ERROR" additivity="false">
+            <appender-ref ref="DEBUG_FILE" level="ERROR" />
+            <appender-ref ref="INFO_FILE" level="ERROR" />
+            <appender-ref ref="ERROR_FILE" level="ERROR" />
+            <appender-ref ref="console"/>
+        </logger>
+
+        <logger name="com.kt" level="DEBUG" additivity="false">
+            <appender-ref ref="DEBUG_FILE" level="DEBUG" />
+            <appender-ref ref="INFO_FILE" level="INFO" />
+            <appender-ref ref="ERROR_FILE" level="ERROR" />
+            <appender-ref ref="console"/>
+        </logger>
+
+        <!-- root level="FATAL">
+            <appender-ref ref="console"/>
+        </root> -->
+    </loggers>
+
+</configuration>
