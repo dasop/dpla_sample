@@ -1,7 +1,7 @@
 name: Java CI with Maven
  
 on: workflow_dispatch
-  input:
+  inputs:
     env:
       type: choice
       description : 'env'
