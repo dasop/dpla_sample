@@ -34,10 +34,27 @@ jobs:
         distribution: 'oracle'
         java-version: '17'
         cache: maven
+        
     - name: Setup timezone
-      uses: zcong1993/setup-timezone@master
+    uses: zcong1993/setup-timezone@master
+    with:
+      timezone: Asia/Seoul 
+         
+    - name: set env  # TAG 를 현재 시간으로 설정
+      if: ${{ inputs.tag == '' }}
+      run: echo "NOW=$(date +'%Y%m%d%H%M%S')" >> $GITHUB_ENV
+      shell: bash
+     
+    - if: ${{ inputs.tag != '' }}
+      run: echo "NOW=${{ inputs.tag }}" >> $GITHUB_ENV
+      shell: bash
+
+    - name: Extract metadata (tags, labels) for Docker
+      id: meta
+      uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
       with:
-        timezone: Asia/Seoul
+        images: ${{ github.repository }}
+        tags: ${{ env.NOW }}
          
     - name: Build with Maven            # 소스코드 빌드 단계
       run: mvn -B package --file pom.xml
