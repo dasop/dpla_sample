@@ -3,7 +3,7 @@ FROM bellsoft/liberica-openjdk-alpine:17
 
 VOLUME /tmp
 
-ENV SPRING_PROFILES_ACTIVE=local
+#ENV SPRING_PROFILES_ACTIVE=local
 
 ARG JAR_FILE=target/*.jar
 
