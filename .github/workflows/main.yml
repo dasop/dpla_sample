@@ -28,8 +28,10 @@ env:
 jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
-    environment: ${{ inputs.env }}
- 
+    permissions:
+      contents: read
+      packages: write
+    
     steps:
     - name: Checkout code
       uses: actions/checkout@v3          # 소스코드 checkout 단계
