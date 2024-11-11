@@ -1,24 +1,26 @@
 name: Java CI with Maven
- 
-on: workflow_dispatch
-  inputs:
-    env:
-      type: choice
-      description : 'env'
-      options:
-      - "local"
-      - "dev"
-      - "tb"
-      - "prod"
-    tag:
-      description: "Docker TAG"
-      required: false
-      default: ""
-    branch:
-      description: "Branch"
-      required: true
-      deault: "main"
 
+on:     
+  workflow_dispatch:
+    inputs:
+      env:
+        type: choice
+        description: 'env'    
+        options:
+        - "local"
+        - "dev"
+        - "tb"
+        - "prd"
+        
+      tag:
+        description: "Docker TAG"
+        required: false
+        default: ""
+      branch:
+        description: "Branch"
+        required: true
+        default: "main"
+        
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
