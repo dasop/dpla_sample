@@ -26,12 +26,9 @@ env:
   IMAGE_NAME: ${{ github.repository }}
   
 jobs:
-  build-and-push-image:
+  build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v3          # 소스코드 checkout 단계
