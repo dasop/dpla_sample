@@ -2,15 +2,15 @@ name: Java CI with Maven
 
 on:     
   workflow_dispatch:
-    inputs:
-      env:
-        type: choice
-        description: 'env'    
-        options:
-        - "local"
-        - "dev"
-        - "tb"
-        - "prd"
+    # inputs:
+    #   env:
+    #     type: choice
+    #     description: 'env'    
+    #     options:
+    #     - "local"
+    #     - "dev"
+    #     - "tb"
+    #     - "prd"
         
       tag:
         description: "Docker TAG"
@@ -32,7 +32,7 @@ jobs:
       contents: read
       packages: write
       security-events: write
-    environment: ${{ inputs.env }}
+    # environment: ${{ inputs.env }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v3          # 소스코드 checkout 단계
@@ -81,8 +81,8 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          build-args: |
-            SPRING_PROFILES_ACTIVE: ${{ inputs.env }}
+          # build-args: |
+          #   SPRING_PROFILES_ACTIVE: ${{ inputs.env }}
   
     # - name: Log in to Azure Container Registry        # Azure 로그인 단계
     #   uses: docker/login-action@v2
