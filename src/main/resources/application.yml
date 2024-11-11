@@ -35,6 +35,17 @@ spring:
     encoding : UTF-8
   pid:
     file: ./${spring.application.name}.pid
+  # datasource:
+  #   driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+  #   url: jdbc:log4jdbc:postgresql://localhost:5432/dpla
+  #   hikari:
+  #     username: ENC(o4JnV0aIOSRHnVjO3osp7SOmOhRtX/LYul5KlyjxKzw=)
+  #     password: ENC(o4JnV0aIOSRHnVjO3osp7SOmOhRtX/LYul5KlyjxKzw=)
+  #     maximum-pool-size: 10     #최대 커넥션 수
+  #     minimum-idle: 5           #최소 유휴 커넥션 수
+  #     idle-timeout: 600000      #유휴 커넥션 유지 시간(밀리초)
+  #     max-lifetime: 1000000     #커넥션 최대수명(밀리초)
+  #     connection-timeout: 30000 #커넥션 대기시간(밀리초)
 
     
 # Kubernates Probes
@@ -74,3 +85,11 @@ dpla:
     aes256ciper:
       secretKey: lHHO/UpOANsEBJjZj3+7c4vFbmsGeiwOhRyQb1LkTjE= # 프로젝트 별 수정
       iv: gpb5et443vrju19d # 프로젝트 별 수정
+
+# Logging
+logging:
+   config: classpath:conf/log4j2-local.xml
+
+
+lamp:
+  serviceDomain: mddp.api

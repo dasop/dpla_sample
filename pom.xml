@@ -177,6 +177,13 @@
                 <configuration>
                     <includeSystemScope>true</includeSystemScope>
                 </configuration>
+                <!-- <executions>
+                    <execution>
+                        <configuration>
+                            <mainClass>com.kt.mddp.KTApplication</mainClass>
+                        </configuration>
+                    </execution>
+                </executions> -->
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -184,7 +191,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>com.kt.common.admin.KTApplication</mainClass>
+                            <mainClass>com.kt.mddp.KTApplication</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -205,13 +212,13 @@
                     </dependency>
                 </dependencies>
             </plugin>
-            <!-- plugin>
+            <!-- <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
                     <packagingExcludes>**/static/**</packagingExcludes>
                 </configuration>
-            </plugin -->
+            </plugin> -->
         </plugins>
         <resources>
             <resource>
